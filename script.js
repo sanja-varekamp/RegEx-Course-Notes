@@ -14,6 +14,18 @@ console.log(pos);
 //let ptrn = RegExp("Pattern", "i") // patern, i stands for modifier
 
 //---------------------------------------------------//
+//--------ANCHORS IN REG EX------------------------//
+//---------------------------------------------------//
+
+// ^ marks the beggining of a string. It's used to check for the 
+// FIRST character/word/digit 
+
+// $ marks the end of a string. It's used to check for the 
+// LAST character/word/digit
+
+
+
+//---------------------------------------------------//
 //--------MODIFIERS IN REG EX------------------------//
 //---------------------------------------------------//
 
@@ -24,10 +36,54 @@ let msg1 = "This is case sensitive Case";
 let str1 = msg1.match(/case/gi);
 console.log(str1); //['case', 'Case'] (because of the i modifier)
 
+//---------------------------------------------------
+
 // m = performs multiline search 
-// s = allows (.) to match new line characters [ES2018] (not for Firefox)
+// it's used together with any of the anchors ^ or $ 
+// it searches for a match in a multiline strings 
+
+let msg11 = "Hello line one\nHello line two \nHello line three";
+console.log(msg11.match(/^Hello/gm)) // ["Hello", "Hello", "Hello"] 
+
+//without the m modifier in the end, it will return only one hello, reason being 
+//it doesn't look at the second line of the string 
+//IMPORTANT NOTE: if there is a single space between \n and Hello, then 
+// m will not work, because the line will then start with a space!
+
+
+let msg12 = "Hello line one 1\nHello line two 2\nHello line three 3";
+console.log(msg12.match(/\d$/gm)) //  ["1", "2", "3"] 
+
+//-----------------------------------------------------------
+
+
+// s = allows (.) to match new line characters [ES2018] (not for Firefox and IE)
+// further explanation in character class dot (down below)
+
+//-----------------------------------------------------------
+
 // u = switches on unicode pattern matching
+// it works with unicode 
+
+// modifier /u works with \p which is a property class 
+// \p takes a unicode property or symbol as an argument L for letter, N - number, S - symbol
+// {Sc} - will return currency symbols 
+
+
+
+// pattern = /\p{unicodeproperty}/ //syntax pattern = /\p{L}/
+
+//search all letters: 
+
+//this code in the course contained an emoji and the {S} would display it in the console  
+let msg13 = "This is my face &#128556;. Tell me how do I look &#128556;"
+console.log(msg13.match(/\p{S}/gu));
+
+//---------------------------------------------------------------
+
 // y = switches on "sticky" mode 
+// basically forces the matching to start at the specified EXACT index position, 
+//without ignoring white space, or starting from the index after the specified one 
 
 //---------------------------------------------------//
 //---------------CHARACTER CLASSES-------------------//
