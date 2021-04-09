@@ -17,10 +17,10 @@ console.log(pos);
 //--------ANCHORS IN REG EX------------------------//
 //---------------------------------------------------//
 
-// ^ marks the beggining of a string. It's used to check for the 
+// ^ (caret) marks the beggining of a string. It's used to check for the 
 // FIRST character/word/digit 
 
-// $ marks the end of a string. It's used to check for the 
+// $ (dollar sign) marks the end of a string. It's used to check for the 
 // LAST character/word/digit
 
 
