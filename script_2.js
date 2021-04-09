@@ -141,11 +141,71 @@ let string17 = "126 4067 8933 45 653";
 let pattern17 = /\b\d\d\d\b/g;
 console.log(string17.match(pattern17)); //[ '126', '653' ]
 
-//---------------------------------------------------------------------
 
 //---------------------------------------------------//
-//---POSITIVE AND NEGATIVE LOOKAHEAD-----------------//
+//---POSITIVE AND NEGATIVE LOOKAHEAD ASSERTIONS------//
 //---------------------------------------------------//
 
+// POSITIVE LOOKAHEAD
+// we use it to find all the words/characters that are followed by something 
+// lookahead (looking for a coma following a word) (?=,)
+// (?=,) 0 or 1 occurence, comparing the equality, coma
+
+let string18 = "Hi, is it you, or not";
+let pattern18 = /\w+(?=,)/g;
+console.log(string18.match(pattern18)); //["Hi", "you"]
+
+// NEGATIVE LOOKAHEAD
+// we use it to find all the words/characters NOT ENDING with a coma , 
+// negative lookahead (looking for words not ending with a coma) (?!,)
+// (?=,) 0 or 1 occurence, not equal to, coma
+
+let string19 = "Hi, is it you, or not";
+let pattern19 = /\w+(?!,)/g;
+console.log(string19.match(pattern19)); //["H", "is", "it", "yo", "or", "not"]
+
+// to get whole words only 
+
+let string20 = "Hi, is it you, or not";
+let pattern20 = /\b\w+(?!,)\b/g;
+console.log(string20.match(pattern20)); //["is", "it", "or", "not"]
+
+//CASE: we want to avoid all words ending with coma or a questionmark. IN that case we have to use
+// | pipe, which is an OR operator 
+// also, ? is a reserved character in RegEx so we need to use \ escape sequence 
+
+let string21 = "Hi, is it you, or not?";
+let pattern21 = /\b\w+(?!,|\?)\b/g;
+console.log(string21.match(pattern21)); //["is", "it", "or"]
 
 
+//---------------------------------------------------//
+//---POSITIVE AND NEGATIVE LOOKBEHIND ASSERTIONS-----//
+//---------------------------------------------------//
+
+// POSITIVE LOOKBEHIND
+// we use it to find all the words/characters that are preceded by something 
+// the <= looks for the designated character BEHIND the string 
+
+// looking for a word, preceded by Dr.
+let string22 = "Dr.Java and Mr.Script are here!";
+let pattern22 = /(?<=Dr.)\w+/g;
+console.log(string22.match(pattern22)); //["Java"]
+
+// looking for a $ in strings. has to be written with an escape sequence, because $ is a
+// designated character in RegEx. the $ is followed by digits
+let string23 = "Told 10 times to pay $30";
+let pattern23 = /(?<=\$)\d+/g;
+console.log(string23.match(pattern23)); //["30"]
+
+// NEGATIVE LOOKBEHIND
+// finds words and characters that are NOT preceded by something 
+// <! 
+
+let string24 = "Told 10 times to pay $30";
+let pattern24 = /(?<!\$)\d+/g;
+console.log(string24.match(pattern24)); //["10", "0"]
+
+let string25 = "Told 10 times to pay $30";
+let pattern25 = /\b(?<!\$)\d+\b/g;
+console.log(string25.match(pattern25)); //["10"]
