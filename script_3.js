@@ -1,4 +1,23 @@
 //---------------------------------------------------//
+//---------------GROUP CAPTURING---------------------//
+//---------------------------------------------------//
+
+rope7 = "123-4567 is to test"
+model4 = /(\d+)-(\d+)/g;
+console.log(model4.exec(rope7)); // '123-4567','123', '4567'
+// '123-4567' - group 0, default group
+// '123' - group 1 (because there are parenthesis around the first \d)
+// '4567' - group 2 (because there are parenthesis around the second \d) 
+
+// IMPORTANT NOTE: Group 0 can NOT be accessed 
+// The others can be accessed by writing ${1} for group 1, ${2} for group 2 
+// ${X} where X is the group number 
+
+
+
+
+
+//---------------------------------------------------//
 //-------METHODS USED WITH REGEX---------------------//
 //---------------------------------------------------//
 
@@ -59,7 +78,28 @@ console.log(rope3.search(model3)); // 2
 // limit is an optional argument. If given then limits number of returned values 
 
 let rope4 = "this1 is2 how3 it4 is";
-console.log(rope4.split(/(\d)/));
+console.log(rope4.split(/(\d)/)); //[ 'this', '1', ' is',  '2', ' how', '3', ' it',  '4', ' is']
 
 //---------------------------------------------------------------------
+
+// replace() syntax: 
+// newString = string.replace(search RegExpattern or string, string to be replaced/function)
+
+// regular example
+let rope5 = "this method is working";
+let newRope = rope5.replace("is", "at");
+console.log(newRope); //that method is working 
+//only the first occurence of "is" is replaced 
+
+// with a RegEx pattern with the globam modifier 
+let rope6 = "this method is working";
+let newRope1 = rope6.replace(/is/g, "at");
+console.log(newRope1); //that method at working
+//every occurence of is is replaced 
+
+//------------------------------------------------------------------------
+
+// test() syntax: 
+// regexPattern.test(string);
+// returns true if it's a match (the word/character exists in the string), false if it's not
 
