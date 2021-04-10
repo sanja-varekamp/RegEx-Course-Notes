@@ -42,5 +42,23 @@ console.log(_string6.match(_pattern6).length); //12 (space not included)
 
 //find the double word in a string 
 _string7 = "This is a a string test test";
-_pattern7 = /[^aeiou\s]/gi;
-console.log(_string7.match(_pattern7).length);
+_pattern7 = /\b(\w+)\s\1/g;
+console.log(_string7.match(_pattern7)); //["a a", "test test"]
+
+//find a word of a specific number of letters (3)
+_string8 = "You and I flying in the sky";
+_pattern8 = /\b\w{3}\b/g;
+console.log(_string8.match(_pattern8)); // ["You", "and", "the", "sky"]
+
+//date format validation; with regex we can not only check the format, 
+//but also validate for month, day and year values
+
+//format validation 
+_string9 = "02/03/2020" //or "02-03-2020" 
+_pattern9 = /^\d{1,2}[\/-]\d{1,2}[\/-]\d{4}$/g;
+console.log(_pattern9.test(_string9)); //true 
+
+//format + date value validation 
+_string10 = "2020-jan-30" 
+_pattern10 = /^(19|20)\d\d([-\s])(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\2(0[1-9]|[12][0-9]|3[01])$/i;
+console.log(_pattern10.test(_string10));

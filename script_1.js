@@ -185,7 +185,7 @@ console.log(str10.match(ptrn10)); //['Y', 'e', 's', '!', 'I', 'd', 'o', 'k', 'n'
 
 // \t and \n can be used as a pattern against which a string can be compared 
 // However, if we want to use them together in one pattern they need to be in brackets
-// otherwise, it returns null
+// otherwise, it returns null (?)
 
 let str11 = "Yes! I do\t know & 10\n times I_say";
 let ptrn11 = /[\n\t]/g;

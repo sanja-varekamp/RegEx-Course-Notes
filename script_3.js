@@ -2,6 +2,8 @@
 //---------------GROUP CAPTURING---------------------//
 //---------------------------------------------------//
 
+// we use parenthesis, to form a group in RegEx 
+
 rope7 = "123-4567 is to test"
 model4 = /(\d+)-(\d+)/g;
 console.log(model4.exec(rope7)); // '123-4567','123', '4567'
@@ -13,9 +15,64 @@ console.log(model4.exec(rope7)); // '123-4567','123', '4567'
 // The others can be accessed by writing ${1} for group 1, ${2} for group 2 
 // ${X} where X is the group number 
 
+//-   -    -    -     -     -    -   -   -   -   -    -    
 
+// when we want to replace the second with the first number 
+// so that 123-4567 becomses 4567-123 
+rope8 = "123-4567 is to test"
+model5 = /(\d+)-(\d+)/g;
+let newString1 = rope8.replace(model5, '$2-$1') //the dash in between, is beacuse there is dash in the number! 
+console.log(newString1); //4567-123 is to test 
 
+//-----------------------------------------------------------
 
+// NAMING THE GROUPS is done with $<groupname>
+rope9 = "Firstname, Surname"
+model6 = /(?<fname>\w+), (?<sname>\w+)/g;
+let newString2 = rope9.replace(model6, '$<sname> $<fname>')
+console.log(newString2); //Surname Firstname
+
+//------------------------------------------------------------
+
+// The groups PROPERTY, of match and matchAll(), returns groups 
+
+rope10 = "Firstname, Surname"
+model7 = /(?<fname>\w+), (?<sname>\w+)/;
+let grpVal = rope10.match(model7).groups
+console.log(grpVal); //{fname: "Firstname", sname: "Surname"}
+console.log(grpVal.fname) //Firstname
+
+//---------------------------------------------------//
+//---------------NON CAPTURING GROUP-----------------//
+//---------------------------------------------------//
+
+//In case we want to axclude any of the groups from being captured then we use ?:
+
+rope11 = "Firstname, Surname"
+model8 = /(\w+), (?:\w+)/g;
+let newString3 = rope11.replace(model8, '$2 $1')
+console.log(newString3) //$2 Firstname
+
+//---------------------------------------------------//
+//--------------------BACK REFERENCE-----------------//
+//---------------------------------------------------//
+
+let rope12 = "Code is 123-5678 and 456-456";
+let model9 = /(\d+)-(\d+)/g;
+console.log(rope12.match(model9)); //["123-5678", "456-456"]
+
+// we want to find the digits that are the same before and after the dash
+// the \1 is a backreference to the value captured in the first group 
+let rope13 = "Code is 123-5678 and 456-456";
+let model10 = /(\d+)-\1/g;
+console.log(rope13.match(model10)); //["456-456"]
+
+//--------------------------------------------------------
+
+// the backreference can be used with named groups using \k
+let rope14 = "Code is 123-5678 and 456-456";
+let model11 = /(?<zipcode>\d+)-\k<zipcode>/g;
+console.log(rope14.match(model11)); //["456-456"]
 
 //---------------------------------------------------//
 //-------METHODS USED WITH REGEX---------------------//
